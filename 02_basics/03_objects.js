@@ -2,6 +2,8 @@
 
 let mySym = Symbol("key1")
 
+// let myObj = new Object() // This is Singleton type of declaration
+
 let myObj = {
     firstName: "Tanveer",
     lastName: "Hussain",
@@ -11,7 +13,7 @@ let myObj = {
     isLoggedIn: false,
     lastLoginDays: ["Monday", "Saturday"],
     [mySym]: "key1"
-}
+} // This is Object Literals type of declaration
 
 console.log(myObj)
 console.log(myObj.email)
