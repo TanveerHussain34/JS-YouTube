@@ -33,6 +33,12 @@ console.log(obj5)
 let obj6 = {...obj1, ...obj2, ...obj3}
 console.log(obj6)
 
+console.log(Object.keys(tinderUser))
+console.log(Object.values(tinderUser))
+console.log(Object.entries(tinderUser))
+
+console.log(tinderUser.hasOwnProperty("email"))
+
 let userObj = [
     {  
         id: 1,
