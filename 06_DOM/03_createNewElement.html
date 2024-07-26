@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DOM Learning</title>
+  </head>
+  <body>
+    <div class="parent">
+      <div class="day">Monday</div>
+      <!-- parent.childNodes gives length not only of number of childs but also counts break lines as this comment will increase by 2 to 15 making it 17, one for child and one for line break but this counts line break once even there are more than one after a child element -->
+      <div class="day">Tuesday</div>
+      <div class="day">Wednesday</div>
+      <div class="day">Thursday</div>
+      <div class="day">Friday</div>
+      <div class="day">Saturday</div>
+      <div class="day">Sunday</div>
+    </div>
+  </body>
+  <script>
+    let parent = document.querySelector(".parent");
+    console.log(parent);
+    console.log(parent.children); // returns HTMLCollection that is just like array
+    console.log(parent.children[2]); // hump day => middle day of working days in week
+    console.log(parent.children[2].innerHTML);
+
+    for (let i = 0; i < parent.children.length; i++) {
+      console.log(parent.children[i].innerHTML);
+    }
+
+    parent.children[2].style.color = "orange";
+
+    console.log(parent.firstElementChild);
+    console.log(parent.lastElementChild);
+
+    let childList = document.querySelectorAll(".day");
+    console.log(childList); // will return all elements containing .day as a NodeList
+    let firstChild = document.querySelector(".day");
+    console.log(firstChild); // will return first element
+
+    console.log(firstChild.parentElement);
+    console.log(firstChild.nextElementSibling);
+
+    console.log("NODES: ", parent.childNodes);
+
+    let heading = document.createElement("h1");
+    console.log(heading);
+    heading.innerText = "Days of Week";
+    heading.className = "heading";
+    heading.id = Math.round(Math.random() * 10 + 1);
+    heading.setAttribute("title", "generated title");
+    heading.style.backgroundColor = "purple";
+    heading.style.color = "white";
+    heading.style.padding = "15px";
+    heading.style.textAlign = "center";
+    heading.style.borderRadius = "12px";
+
+    document.body.insertBefore(heading, parent);
+  </script>
+</html>
