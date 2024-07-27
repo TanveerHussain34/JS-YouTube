@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" type="text/css" href="../styles.css" />
+    <title>Your Local Time</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        background-color: #212121;
+        color: #fff;
+      }
+      .center {
+        display: flex;
+        height: 100vh;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+      }
+      #clock {
+        font-size: 64px;
+        background-color: orange;
+        padding: 16px 64px;
+        margin-top: 10px;
+        border-radius: 10px;
+      }
+      span {
+        font-size: 64px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="center">
+      <div id="banner"><span>Your Local Time</span></div>
+      <div id="clock"></div>
+    </div>
+  </body>
+  <script>
+    const colors = [
+      "red",
+      "orange",
+      "#00008B",
+      "green",
+      "blue",
+      "purple",
+      "#FF00FF",
+      "brown",
+      "#808000",
+      "black",
+    ];
+    let clock = document.getElementById("clock");
+    setInterval(() => {
+      let date = new Date();
+      let seconds = date.getSeconds();
+      clock.innerHTML = date.toLocaleTimeString();
+      clock.style.backgroundColor = colors[seconds % colors.length];
+    }, 1000);
+  </script>
+</html>
