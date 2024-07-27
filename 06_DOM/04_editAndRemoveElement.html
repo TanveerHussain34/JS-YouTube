@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DOM Learning</title>
+  </head>
+  <body>
+    <ul class="language">
+      <li>JavaScript</li>
+    </ul>
+  </body>
+  <script>
+    // CREATE
+    function addLanguage(langName) {
+      const li = document.createElement("li");
+      li.innerHTML = langName;
+      document.querySelector(".language").appendChild(li);
+    } // this is not the optimized way because it traverses the complete tree(use of innerHTML)
+    addLanguage("Python");
+    addLanguage("C++");
+
+    function addOptiLanguage(langName) {
+      const li = document.createElement("li");
+      li.appendChild(document.createTextNode(langName));
+      document.querySelector(".language").appendChild(li);
+    } // this is the optimized way that does not traverse the complete tree(use of appendChild and createTextNode)
+    addOptiLanguage("Ruby");
+    addOptiLanguage("Java");
+
+    // EDIT
+    // First Method
+    let thirdLi = document.querySelector("li:nth-child(3)");
+    thirdLi.innerHTML = "PHP";
+
+    // Second Method
+    let newLi = document.createElement("li");
+    newLi.textContent = "C#";
+    thirdLi.replaceWith(newLi);
+
+    // Third Method
+    newLi.outerHTML = "<li>CSS</li>";
+    thirdLi.replaceWith(newLi);
+
+    // REMOVE
+    let lastLang = document.querySelector("li:last-child");
+    lastLang.remove();
+  </script>
+</html>
