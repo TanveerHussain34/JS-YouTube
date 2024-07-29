@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Events in JS</title>
+    <style>
+      img {
+        width: 200px;
+        height: 200px;
+        object-fit: cover;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Events in JavaScript</h2>
+    <div>
+      <ul id="images">
+        <li>
+          <img id="friends" src="friends.jpg" alt="" />
+          <!-- onclick="alert(`clicked on friends`)" -->
+        </li>
+        <li>
+          <img id="moon" src="moon.jpg" alt="" />
+        </li>
+        <li>
+          <img id="sunflower" src="sunflower.jpg" alt="" />
+        </li>
+        <li>
+          <img id="colors" src="colors.jpg" alt="" />
+        </li>
+        <li>
+          <img id="flowers" src="flowers.jpg" alt="" />
+        </li>
+        <li><a id="google" href="https://google.com">Google</a></li>
+      </ul>
+    </div>
+  </body>
+  <script>
+    document.getElementById("moon").onclick = function () {
+      alert("clicked on moon");
+    };
+
+    document.getElementById("colors").addEventListener("click", function (e) {
+      console.log(e);
+      console.log(e.target);
+      alert("clicked on ul tag");
+    });
+
+    // attachEvent() // internet explorer
+    // jQuery - on // on is used to handle events in jQuery
+
+    // Topics to be explored
+    // type, timestamp, preventDefault
+    // target, toElement, srcElement, currentTarget
+    // clientX, clientY, screenX, screenY
+    // altkey, ctrlkey, shiftkey, keycode
+
+    document.getElementById("images").addEventListener(
+      "click",
+      function (e) {
+        console.log("clicked inside the ul tag");
+      },
+      false // propagation(false is the default behavior here) Bubbling(bottom to top)
+      // true // Capturing(top to bottom)
+    );
+
+    document.getElementById("friends").addEventListener(
+      "click",
+      function (e) {
+        console.log("friends clicked");
+      },
+      false // propagation(false is the default behavior here) Bubbling(bottom to top)
+      // true // Capturing(top to bottom)
+    );
+
+    document.getElementById("images").addEventListener(
+      "click",
+      function (e) {
+        console.log("clicked inside the ul tag");
+      },
+      true // Capturing(top to bottom)
+    );
+
+    document.getElementById("friends").addEventListener(
+      "click",
+      function (e) {
+        console.log("friends clicked");
+      },
+      true // Capturing(top to bottom)
+    );
+
+    document.getElementById("google").addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      console.log("google clicked");
+    });
+
+    document.querySelector("#images").addEventListener(
+      "click",
+      function (e) {
+        console.log(e.target.parentNode);
+        // let removeIt = e.target.parentNode;
+        // removeIt.remove()
+        // removeIt.parentNode.removeChild(removeIt); // confusing method
+        // clicking on the img will remove li and clicking on li will remove the complete ul, to prevent this we are going to use strict checks
+        if (e.target.tagName === "IMG") {
+          console.log(e.target.id);
+          let removeIt = e.target.parentNode;
+          removeIt.remove();
+        }
+      },
+      false
+    );
+  </script>
+</html>
