@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Event KeyCodes</title>
+    <link rel="stylesheet" type="text/css" href="../styles.css" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      .container {
+        background-color: #1c1c1c;
+        color: #ffffff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        height: 100vh;
+      }
+      table {
+        border-collapse: collapse;
+      }
+      th {
+        padding: 15px 30px;
+        border: 2px solid white;
+        background-color: #4caf50;
+        color: white;
+      }
+      td {
+        padding: 15px 30px;
+        border: 2px solid white;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1 id="key">Press any Key and watch its Details</h1>
+    </div>
+  </body>
+  <script>
+    let key = document.getElementById("key");
+    window.addEventListener("keydown", (e) => {
+      key.innerHTML = `
+          <table>
+            <tr>
+              <th>Key</th>
+              <th>Code</th>
+              <th>KeyCode</th>
+            </tr>
+            <tr>
+              <td>${e.key === " " ? "Space" : e.key}</td>
+              <td>${e.code}</td>
+              <td>${e.keyCode}</td>
+            </tr>
+          </table>
+        `;
+    });
+  </script>
+</html>
