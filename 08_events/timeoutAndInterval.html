@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>setTimeout and setInterval</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        height: 100vh;
+      }
+      h1 {
+        margin-bottom: 20px;
+      }
+      h3 {
+        font-size: 20px;
+        text-align: center;
+        padding: 20px;
+        background-color: #dbdbdb;
+        border-radius: 5px;
+      }
+      .buttons {
+        width: 20%;
+        margin: 16px 0 10px;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+      }
+      button {
+        font-size: 16px;
+        font-weight: bold;
+        border: none;
+        border-radius: 5px;
+        padding: 8px 16px;
+        background-color: black;
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>setTimeout and setInterval</h1>
+      <h3>
+        This is the text that will change its content after TIMEOUT and will be
+        changing its color after INTERVALS.
+      </h3>
+      <div class="buttons">
+        <button id="stopTimeout">Stop Timeout</button>
+        <button id="stopInterval">Stop Interval</button>
+      </div>
+      <p><b>Note: </b>Stop Timeout before two seconds.</p>
+    </div>
+  </body>
+  <script>
+    let content = document.querySelector("h3");
+    let container = document.querySelector(".container");
+    let stopTimeout = document.getElementById("stopTimeout");
+    let stopInterval = document.getElementById("stopInterval");
+    let colorsArray = ["red", "blue", "green", "yellow", "purple", "orange"];
+    let currentIndex = 0;
+    let timeoutId = setTimeout(() => {
+      content.innerHTML =
+        "Content changed after TIMEOUT and background color changing after INTERVALS.";
+    }, 2000);
+
+    stopTimeout.addEventListener("click", (e) => {
+      clearTimeout(timeoutId);
+    });
+
+    let intervalId = setInterval(() => {
+      content.style.backgroundColor = colorsArray[currentIndex];
+      if (currentIndex === 5) {
+        currentIndex = 0;
+      } else {
+        currentIndex++;
+      }
+    }, 1000);
+
+    stopInterval.addEventListener("click", (e) => {
+      clearInterval(intervalId);
+    });
+  </script>
+</html>
