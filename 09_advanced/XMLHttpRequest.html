@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>APIRequest</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+      }
+      h1 {
+        padding: 10px;
+        margin: 10px;
+      }
+      button {
+        border-radius: 10px;
+        color: white;
+        font-size: 16px;
+        padding: 10px 20px;
+        font-weight: bold;
+        background-color: black;
+        border: 1px solid black;
+      }
+      button:hover {
+        color: black;
+        background-color: white;
+        border: 1px solid black;
+      }
+      .card {
+        margin-top: 20px;
+        padding: 10px;
+        width: fit-content;
+        border: 2px solid black;
+        border-radius: 15px;
+        display: none;
+        width: 280px;
+      }
+      #img {
+        border-radius: 15px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      #img img {
+        width: 100%;
+        height: auto;
+        border-radius: 10px;
+      }
+      #name {
+        margin-top: 15px;
+        margin-bottom: 5px;
+        text-align: center;
+      }
+      #bio {
+        margin-top: 15px;
+        font-size: 18px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Requesting API using XMLHttpRequest.</h1>
+    <button id="getData" onclick="visited()">Fetch GitHub Profile</button>
+    <div class="card">
+      <div id="img"></div>
+      <h2 id="name"></h2>
+      <hr />
+      <p id="bio"></p>
+    </div>
+  </body>
+  <script>
+    function visited() {
+      let dataFetched = document.getElementById("getData");
+      dataFetched.style.display = "none";
+    }
+    let card = document.querySelector(".card");
+    let img = document.getElementById("img");
+    let name = document.getElementById("name");
+    let bio = document.getElementById("bio");
+    const requestURL = "https://api.github.com/users/TanveerHussain34";
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", requestURL);
+    xhr.onreadystatechange = function () {
+      console.log(xhr.readyState);
+      if (xhr.readyState === 4) {
+        const data = JSON.parse(this.responseText);
+        console.log(data);
+        document.getElementById("getData").addEventListener("click", (e) => {
+          card.style.display = "block";
+          img.innerHTML = `<img src="${data.avatar_url}" alt="" />`;
+          name.innerHTML = data.name;
+          bio.innerHTML = data.bio;
+        });
+      }
+    };
+    xhr.send();
+  </script>
+</html>
