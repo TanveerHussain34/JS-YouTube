@@ -50,11 +50,63 @@ const promiseFour = new Promise(function (resolve, reject) {
   }, 1000);
 });
 
-let userName = promiseFour.then(function (user) {
-  console.log(user);
-  return user.userName;
-});
-console.log(userName);
-// PromiseFive
+// Promise Four
+promiseFour
+  .then(function (user) {
+    console.log(user);
+    return user.userName;
+  })
+  .then(function (user_name) {
+    // this is called chaining, that is used again and again
+    console.log(user_name);
+  })
+  .catch(function (err) {
+    console.log(err);
+  })
+  .finally(function () {
+    console.log("The promise is either resolved or rejected.");
+  });
 
-// PromiseSix
+// PromiseFive
+const promiseFive = new Promise(function (resolve, reject) {
+  setTimeout(function () {
+    let error = true;
+    if (!error) {
+      resolve({ langName: "JavaScript", password: "123" });
+    } else {
+      reject("ERROR: JS went wrong!");
+    }
+  }, 1000);
+});
+
+async function consumePromiseFive() {
+  try {
+    const response = await promiseFive;
+    console.log(response);
+  } catch (error) {
+    console.log(error);
+  }
+}
+consumePromiseFive();
+
+async function getAllUsers() {
+  try {
+    const response = await fetch("https://jsonplaceholder.typicode.com/users");
+    const data = await response.json();
+    console.log(data);
+  } catch (error) {
+    console.log("Fetch error: ", error);
+  }
+}
+getAllUsers();
+
+fetch("https://jsonplaceholder.typicode.com/users")
+  .then(function (response) {
+    return response.json();
+  })
+  .then(function (data) {
+    console.log(data);
+  })
+  .catch(function (error) {
+    console.log("Fetch error: ", error);
+  });
