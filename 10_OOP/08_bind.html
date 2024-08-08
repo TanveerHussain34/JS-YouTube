@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bind in React</title>
+  </head>
+  <body>
+    <button>Button</button>
+  </body>
+  <script>
+    // Use of BIND
+    // If we do not write bind(this), this of handleClick logs <button>Button</button> to the console and do not have access to class React
+    // We bind handleClick with class React inisde <button>Button</button>
+    // Now this of handleClick logs React {library: 'React', server: 'https://localhost:3000'} to the console and have access to class React and now we can log to the console this.server and this.library inside handleClick.
+    class React {
+      constructor() {
+        this.library = "React";
+        this.server = "https://localhost:3000";
+
+        // requirement
+        document
+          .querySelector("button")
+          //   .addEventListener("click", this.handleClick);
+          .addEventListener("click", this.handleClick.bind(this));
+      }
+      handleClick() {
+        console.log("Click detected!");
+        // console.log(this);
+        console.log(this.server);
+      }
+    }
+    const chai = new React();
+  </script>
+</html>
