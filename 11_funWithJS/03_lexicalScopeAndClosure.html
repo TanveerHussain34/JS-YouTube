@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Real World Example</title>
+  </head>
+  <body>
+    <h2>Real World Example of Lexical Scope and Closure</h2>
+    <button id="orange">Orange</button>
+    <button id="green">Green</button>
+  </body>
+  <script>
+    // document.getElementById("orange").onclick = function () {
+    //   document.body.style.backgroundColor = "orange";
+    // };
+    // document.getElementById("green").onclick = function () {
+    //   document.body.style.backgroundColor = "green";
+    // };
+    // Thats ok but if we want 500 buttons then even copy paste will be difficult so thats why we use closure technique
+
+    // Real World Example of Closure using Lexical Scope
+
+    // function clickHandler(color) {
+    //   document.body.style.backgroundColor = `${color}`;
+    // }
+
+    function clickHandler(color) {
+      function changeBodyColor() {
+        document.body.style.backgroundColor = `${color}`;
+      }
+      return changeBodyColor;
+    }
+    document.getElementById("orange").onclick = clickHandler("orange"); // expects a function in return not the direct function(reference and execution)
+    document.getElementById("green").onclick = clickHandler("green");
+  </script>
+</html>
